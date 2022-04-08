@@ -1,15 +1,40 @@
 <template>
   <h1>Rick and Morty Episode Search</h1>
-  <RickMortySearch></RickMortySearch>
+  <div class="table-items">
+    <RickMortyItem
+      v-for="episode in filteredEpisodes"
+      :key="episode"
+      :episode="episode"
+    ></RickMortyItem>
+  </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import RickMortySearch from "@/components/RickMortySearch";
+import RickMortyItem from "@/components/RickMortyItem";
 
 export default defineComponent({
-  components: { RickMortySearch },
+  components: { RickMortyItem },
+  data: function () {
+    return {
+      filteredEpisodes: [],
+    };
+  },
+  methods: {
+    search() {
+      fetch("https://rickandmortyapi.com/api/episode")
+        .then((res) => res.json())
+        .then((info) => (this.filteredEpisodes = info.results));
+    },
+  },
+  beforeMount() {
+    this.search();
+  },
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.row-item {
+  background: lightgray;
+}
+</style>

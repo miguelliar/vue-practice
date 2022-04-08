@@ -21,6 +21,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "episodes",
     component: () => import("../views/RickMortyPage.vue"),
   },
+  {
+    path: "/rick_morty_episodes/:episode",
+    name: "episode",
+    component: import("../views/RickMortyEpisode.vue"),
+  },
 ];
 
 const router = createRouter({

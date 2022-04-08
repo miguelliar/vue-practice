@@ -15,16 +15,7 @@
 <script>
 import { defineComponent } from "vue";
 
-export default defineComponent({
-  props: {},
-  methods: {
-    search() {
-      fetch("https://rickandmortyapi.com/api/episode")
-        .then((res) => res.json())
-        .then((info) => console.log(info));
-    },
-  },
-});
+export default defineComponent({});
 </script>
 
 <style scoped></style>
