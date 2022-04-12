@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/rick_morty_episodes/:episode",
     name: "episode",
-    component: import("../views/RickMortyEpisode.vue"),
+    component: () => import("../views/RickMortyEpisode.vue"),
   },
 ];
 
