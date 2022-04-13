@@ -1,21 +1,26 @@
 import { mount, shallowMount } from "@vue/test-utils";
 import App from "../App.vue";
-import RickMortyPage from "@/views/RickMortyPage.vue";
+import RickMortyEpisode from "@/views/RickMortyEpisode.vue";
 import { getCharacterStubs } from "@/__stubs__/character-stubs.factory";
 
-const propData : {characterStub : getCharacterStubs(4), ;
+const propData = { episodeName: "test", characterStub: [] };
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+propData.characterStub = getCharacterStubs(4);
 
 describe("Character page component", () => {
   it("Should render the app", () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
-        json: () => Promise.resolve(characterStub),
+        json: () => Promise.resolve(propData.characterStub),
       })
     ) as jest.Mock;
-    const wrapper = mount(RickMortyPage);
+    // If we do not have params, what do we do
+    const wrapper = mount(RickMortyEpisode);
     wrapper.setData({
-      filteredEpisodes: characterStub,
+      episodeName: propData.episodeName,
     });
-    expect(wrapper.html()).toContain("<h1>Rick and Morty Episode Search</h1>");
+    expect(wrapper.html()).toContain("<h1>Rick and Morty</h1>");
   });
 });
